@@ -172,18 +172,16 @@ jobs:
       uses: docker/setup-buildx-action@v3
 
     - name: Build Docker image
-      uses: docker/build-push-action@v5
-      with:
-        context: .
-        file: ./Dockerfile
-        push: false
-        tags: quantum-zkp:test
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
+      run: docker build -t quantum-zkp:test .
+
+    - name: Verify Docker image exists
+      run: docker images quantum-zkp:test
 
     - name: Test Docker image
       run: |
+        echo "Testing Docker image..."
         docker run --rm quantum-zkp:test help
+        echo "Testing demo..."
         docker run --rm quantum-zkp:test demo
 
   # Build and push Docker image (on release)
