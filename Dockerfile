@@ -43,10 +43,10 @@ RUN addgroup -g 1001 qzkp && \
 WORKDIR /app
 
 # Copy binary from builder stage
-COPY --from=builder /app/quantumzkp/qzkp .
+COPY --from=builder /app/qzkp .
 
 # Copy documentation (optional)
-COPY --from=builder /app/quantumzkp/*.md ./docs/
+COPY --from=builder /app/*.md ./docs/ || true
 
 # Change ownership to non-root user
 RUN chown -R qzkp:qzkp /app

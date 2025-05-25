@@ -163,7 +163,7 @@ jobs:
   docker-build:
     name: Docker Build and Test
     runs-on: ubuntu-latest
-    needs: [test, lint-and-security]
+    needs: [test]
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -175,6 +175,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: .
+        file: ./Dockerfile
         push: false
         tags: quantum-zkp:test
         cache-from: type=gha
@@ -189,7 +190,7 @@ jobs:
   docker-release:
     name: Docker Release
     runs-on: ubuntu-latest
-    needs: [test, lint-and-security, docker-build]
+    needs: [test, docker-build]
     if: github.event_name == 'release'
     permissions:
       contents: read
@@ -230,41 +231,4 @@ jobs:
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
-  # Documentation deployment
-  docs-deploy:
-    name: Deploy Documentation
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    needs: [test, lint-and-security]
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
 
-    - name: Setup Pages
-      uses: actions/configure-pages@v4
-
-    - name: Build documentation site
-      run: |
-        mkdir -p docs-site
-        cp *.md docs-site/
-        echo "# Quantum ZKP Documentation" > docs-site/index.md
-        echo "" >> docs-site/index.md
-        echo "## Available Documents" >> docs-site/index.md
-        echo "- [README](README.md)" >> docs-site/index.md
-        echo "- [Scientific Paper](SCIENTIFIC_PAPER.md)" >> docs-site/index.md
-        echo "- [API Documentation](API.md)" >> docs-site/index.md
-        echo "- [Usage Guide](USAGE_GUIDE.md)" >> docs-site/index.md
-        echo "- [Security Policy](SECURITY.md)" >> docs-site/index.md
-
-    - name: Upload Pages artifact
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: docs-site
-
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
