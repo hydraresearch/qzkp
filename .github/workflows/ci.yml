@@ -179,10 +179,10 @@ jobs:
 
     - name: Test Docker image
       run: |
-        echo "Testing Docker image..."
-        docker run --rm quantum-zkp:test help
+        echo "Testing Docker image default command (help)..."
+        docker run --rm quantum-zkp:test
         echo "Testing demo..."
-        docker run --rm quantum-zkp:test demo
+        docker run --rm quantum-zkp:test ./qzkp demo
 
   # Build and push Docker image (on release)
   docker-release:
