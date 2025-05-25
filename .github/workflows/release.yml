@@ -36,40 +36,40 @@ jobs:
 
     - name: Install dependencies
       run: |
-        
+
         go mod download
 
     - name: Run tests
       run: |
-        
+
         go test -v ./...
 
     - name: Build binaries
       run: |
-        
-        mkdir -p ../dist
-        
+        mkdir -p dist
+
         # Build for multiple platforms
-        GOOS=linux GOARCH=amd64 go build -o ../dist/qzkp-linux-amd64 .
-        GOOS=linux GOARCH=arm64 go build -o ../dist/qzkp-linux-arm64 .
-        GOOS=darwin GOARCH=amd64 go build -o ../dist/qzkp-darwin-amd64 .
-        GOOS=darwin GOARCH=arm64 go build -o ../dist/qzkp-darwin-arm64 .
-        GOOS=windows GOARCH=amd64 go build -o ../dist/qzkp-windows-amd64.exe .
-        
+        GOOS=linux GOARCH=amd64 go build -o dist/qzkp-linux-amd64 .
+        GOOS=linux GOARCH=arm64 go build -o dist/qzkp-linux-arm64 .
+        GOOS=darwin GOARCH=amd64 go build -o dist/qzkp-darwin-amd64 .
+        GOOS=darwin GOARCH=arm64 go build -o dist/qzkp-darwin-arm64 .
+        GOOS=windows GOARCH=amd64 go build -o dist/qzkp-windows-amd64.exe .
+
         # Create checksums
-        cd ../dist
+        cd dist
         sha256sum * > checksums.txt
+        cd ..
 
     - name: Create release archives
       run: |
         cd dist
-        
+
         # Create tar.gz for Unix systems
         tar -czf qzkp-linux-amd64.tar.gz qzkp-linux-amd64
         tar -czf qzkp-linux-arm64.tar.gz qzkp-linux-arm64
         tar -czf qzkp-darwin-amd64.tar.gz qzkp-darwin-amd64
         tar -czf qzkp-darwin-arm64.tar.gz qzkp-darwin-arm64
-        
+
         # Create zip for Windows
         zip qzkp-windows-amd64.zip qzkp-windows-amd64.exe
 
