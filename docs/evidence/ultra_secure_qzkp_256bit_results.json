@@ -1,0 +1,43 @@
+{
+  "commitment": {
+    "hash": "2d363eaf4008ce52b6ae79e68a870b54b8fa0454f34f70720585f3d6d05a60ac",
+    "dimension": 4,
+    "security_level": 256,
+    "timestamp": 1748193716700548000
+  },
+  "proof": {
+    "quantum_dimensions": 4,
+    "security_level": 256,
+    "soundness_error": "2^-256",
+    "identifier_hash": "794391107cd92ed615d2999c8a5e0f5a",
+    "commitment_hash": "ab691c167f465f30eb6fd115b706675d",
+    "entanglement_bound": 1.0,
+    "coherence_bound": 4.0,
+    "execution_metadata": {
+      "job_id": "d0sn3b54mb60008xb2qg",
+      "backend": "ibm_brisbane",
+      "execution_time": 10.298183917999268,
+      "circuit_depth": 11,
+      "shots": 1000,
+      "security_level": 256
+    },
+    "measurement_statistics": {
+      "total_measurements": 1000,
+      "unique_outcomes": 4,
+      "entropy_bound": 2.0,
+      "distribution_type": "ultra_secure_quantum_measurement",
+      "security_level": 256
+    },
+    "security_guarantees": {
+      "zero_knowledge": true,
+      "soundness_bits": 256,
+      "post_quantum_secure": true,
+      "information_theoretic_security": true,
+      "long_term_secure": true
+    },
+    "timestamp": 1748193716.7005749,
+    "signature": "5ec9b3a9453b860f5f995eae944361159e72da78e6780c7ccb598bd6e65c7c7c"
+  },
+  "verification_result": false,
+  "test_type": "ultra_secure_qzkp_256bit_real_hardware"
+}

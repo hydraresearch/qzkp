@@ -25,8 +25,22 @@ This implementation provides **TWO** different proof systems:
    - No information leakage
    - Post-quantum secure
 
+## 📁 **Repository Structure**
+
+### Documentation (`/docs/`)
+- **`/academic/`** - Research papers and formal documentation
+- **`/evidence/`** - Proof of real quantum hardware execution
+- **`/research/`** - Complete 8-year research timeline
+- **`/articles/`** - Public articles and media content
+
+### Implementation
+- **Go files** - Core quantum cryptography implementation
+- **Python files** - IBM Quantum integration and testing
+- **JSON files** - Quantum execution results and data
+
 ## 📋 **Table of Contents**
 
+- [Repository Structure](#repository-structure)
 - [Installation](#installation)
 - [Quick Start](#quick-start)
 - [API Reference](#api-reference)

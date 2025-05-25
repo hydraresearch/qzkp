@@ -2,7 +2,7 @@
 
 ## Lead Author & Developer
 
-**Nick Cloutier**
+**Nicolas Cloutier**
 
 **ORCID:** 0009-0008-5289-5324
 
@@ -67,7 +67,7 @@ If you contribute to this project and wish to be cited in academic work, please 
 ## Contact
 
 For questions about contributing, please contact:
-- Nick Cloutier: [GitHub](https://github.com/nicksdigital/)
+- Nicolas Cloutier: [GitHub](https://github.com/nicksdigital/)
 - Project Issues: [GitHub Issues](https://github.com/hydraresearch/qzkp/issues)
 
 ### Media Contacts

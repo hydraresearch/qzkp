@@ -1,0 +1,195 @@
+{
+  "states": {
+    "bell_state_phi_plus": {
+      "vector": [
+        [
+          0.7071067811865475,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.7071067811865475,
+          0.0
+        ]
+      ],
+      "description": "Bell state |\u03a6+\u27e9",
+      "qubits": 2,
+      "backend": "fake_almaden",
+      "fidelity": 0.967331187049109,
+      "coherence": 0.24999999999999994,
+      "entanglement": 0.5,
+      "metadata": {
+        "circuit_depth": 2,
+        "num_gates": 2,
+        "use_simulator": true
+      }
+    },
+    "ghz_state_3q": {
+      "vector": [
+        [
+          0.7071067811865475,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.7071067811865475,
+          0.0
+        ]
+      ],
+      "description": "3-qubit GHZ state",
+      "qubits": 3,
+      "backend": "fake_almaden",
+      "fidelity": 0.9641304472478806,
+      "coherence": 0.12499999999999997,
+      "entanglement": 0.3333333333333333,
+      "metadata": {
+        "circuit_depth": 3,
+        "num_gates": 3,
+        "use_simulator": true
+      }
+    },
+    "w_state_3q": {
+      "vector": [
+        [
+          0.5773502691896257,
+          0.0
+        ],
+        [
+          0.408248290463863,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.408248290463863,
+          0.0
+        ],
+        [
+          0.5773502691896257,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ],
+      "description": "3-qubit W state",
+      "qubits": 3,
+      "backend": "fake_almaden",
+      "fidelity": 0.9689169611049088,
+      "coherence": 0.125,
+      "entanglement": 0.6394319446848299,
+      "metadata": {
+        "circuit_depth": 5,
+        "num_gates": 5,
+        "use_simulator": true
+      }
+    },
+    "superposition_2q": {
+      "vector": [
+        [
+          0.4999999999999999,
+          0.0
+        ],
+        [
+          0.4999999999999999,
+          0.0
+        ],
+        [
+          0.4999999999999999,
+          0.0
+        ],
+        [
+          0.4999999999999999,
+          0.0
+        ]
+      ],
+      "description": "2-qubit superposition",
+      "qubits": 2,
+      "backend": "fake_almaden",
+      "fidelity": 0.9917145888940143,
+      "coherence": 0.2499999999999999,
+      "entanglement": 0.9999999999999998,
+      "metadata": {
+        "circuit_depth": 1,
+        "num_gates": 2,
+        "use_simulator": true
+      }
+    },
+    "random_state_2q": {
+      "vector": [
+        [
+          0.4001969246020955,
+          0.20178976996456843
+        ],
+        [
+          0.35588333077846884,
+          0.1357295117853667
+        ],
+        [
+          0.5758007417392238,
+          -0.21960329917943203
+        ],
+        [
+          0.4676303504030338,
+          -0.235791469237554
+        ]
+      ],
+      "description": "Random 2-qubit state",
+      "qubits": 2,
+      "backend": "fake_almaden",
+      "fidelity": 0.9890344507738292,
+      "coherence": 0.24999999999999994,
+      "entanglement": 0.9557757255961804,
+      "metadata": {
+        "circuit_depth": 2,
+        "num_gates": 4,
+        "use_simulator": true
+      }
+    }
+  },
+  "generated_at": "2025-05-25T16:51:54",
+  "backend": "fake_almaden",
+  "use_simulator": true,
+  "total_states": 5
+}

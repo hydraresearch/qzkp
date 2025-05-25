@@ -1,0 +1,15 @@
+{
+  "backend": "ibm_brisbane",
+  "job_id": "d0smnrfvx7bg00819cx0",
+  "circuit_depth": 8,
+  "shots": 1000,
+  "counts": {
+    "11": 507,
+    "00": 450,
+    "10": 15,
+    "01": 28
+  },
+  "bell_fidelity": 0.957,
+  "timestamp": "2025-05-25 12:52:49.438000-04:00",
+  "quantum_hardware": true
+}

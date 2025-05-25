@@ -311,14 +311,14 @@ func TestSecureProofMetadataBounds(t *testing.T) {
 // Helper function to check if a string contains a substring
 func contains(s, substr string) bool {
 	return len(substr) > 0 && len(s) >= len(substr) &&
-		   func() bool {
-			   for i := 0; i <= len(s)-len(substr); i++ {
-				   if s[i:i+len(substr)] == substr {
-					   return true
-				   }
-			   }
-			   return false
-		   }()
+		func() bool {
+			for i := 0; i <= len(s)-len(substr); i++ {
+				if s[i:i+len(substr)] == substr {
+					return true
+				}
+			}
+			return false
+		}()
 }
 
 func TestInformationLeakageAnalysis(t *testing.T) {
@@ -1050,4 +1050,59 @@ func TestProveFromBytesConsistency(t *testing.T) {
 		t.Errorf("ProveFromBytes vs ProveWithDeterministicSuperposition commitments differ: %s vs %s",
 			proof1.Commitment, proof3.Commitment)
 	}
+}
+
+// TestQuantumSafeRandomIntegration verifies that the quantum-safe random integration works
+func TestQuantumSafeRandomIntegration(t *testing.T) {
+	// 1) Initialize QZKP with quantum-safe random
+	ctx := []byte("test-quantum-safe-random")
+	q, err := NewQuantumZKP(3, 128, ctx)
+	if err != nil {
+		t.Fatalf("NewQuantumZKP failed: %v", err)
+	}
+
+	// Verify that the quantum-safe random generator was initialized
+	if q.Random == nil {
+		t.Fatal("QuantumSafeRandom was not initialized")
+	}
+
+	// 2) Prepare inputs
+	states := []complex128{complex(0.7071, 0), complex(0.7071, 0), complex(0, 0), complex(0, 0)}
+	identifier := "quantum_safe_test"
+	key := []byte("12345678901234567890123456789012")
+
+	// 3) Generate proof using quantum-safe randomness
+	proof, err := q.Prove(states, identifier, key)
+	if err != nil {
+		t.Fatalf("Prove() error: %v", err)
+	}
+
+	// 4) Verify the proof
+	if ok := q.VerifyProof(proof, key); !ok {
+		t.Error("VerifyProof() returned false, expected true")
+	}
+
+	// 5) Test secure implementation with hybrid randomness
+	sq, err := NewSecureQuantumZKP(3, 128, ctx)
+	if err != nil {
+		t.Fatalf("NewSecureQuantumZKP failed: %v", err)
+	}
+
+	// Verify that the hybrid random generator was initialized
+	if sq.HybridRandom == nil {
+		t.Fatal("HybridRandomGenerator was not initialized")
+	}
+
+	// 6) Generate secure proof using hybrid randomness
+	secureProof, err := sq.SecureProveVectorKnowledge(states, identifier, key)
+	if err != nil {
+		t.Fatalf("SecureProveVectorKnowledge failed: %v", err)
+	}
+
+	// 7) Verify the secure proof
+	if !sq.VerifySecureProof(secureProof, key) {
+		t.Error("Secure proof verification failed")
+	}
+
+	t.Log("Quantum-safe random integration test passed successfully")
 }

@@ -1,0 +1,32 @@
+{
+  "commitment": {
+    "hash": "0d65dd584d4ad9ef93cdb1cae8e763be",
+    "dimension": 4,
+    "timestamp": 1748192992.0991879
+  },
+  "proof": {
+    "quantum_dimensions": 4,
+    "security_level": 128,
+    "identifier_hash": "8543ce0407d9dd83",
+    "commitment_hash": "077fb6cea8491c22",
+    "entanglement_bound": 1.0,
+    "coherence_bound": 4.0,
+    "execution_metadata": {
+      "job_id": "d0smxp6vx7bg00819dqg",
+      "backend": "ibm_brisbane",
+      "execution_time": 8.191810846328735,
+      "circuit_depth": 7,
+      "shots": 1000
+    },
+    "measurement_statistics": {
+      "total_measurements": 1000,
+      "unique_outcomes": 4,
+      "entropy_bound": 2.0,
+      "distribution_type": "quantum_measurement"
+    },
+    "timestamp": 1748192992.099215,
+    "signature": "f17f6dba935173a4d17deef00f6f5b951523f52867b4c7277bc64826af2ad548"
+  },
+  "verification_result": true,
+  "test_type": "secure_qzkp_real_hardware"
+}

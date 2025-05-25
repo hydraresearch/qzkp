@@ -1,0 +1,35 @@
+# IBM Quantum Integration Requirements
+# Python 3.11 compatible versions
+# Based on IBM Quantum documentation: https://docs.quantum.ibm.com/guides/hello-world
+
+# Core Qiskit packages (Python 3.11 compatible)
+qiskit[all]~=2.0.0
+qiskit-ibm-runtime~=0.37.0
+
+# Scientific computing (Python 3.11 compatible)
+numpy>=1.21.0,<2.0.0
+matplotlib>=3.5.0,<4.0.0
+
+# Additional useful packages for quantum computing
+scipy>=1.7.0,<2.0.0
+sympy>=1.9.0,<2.0.0
+
+# Environment management for .env files
+python-dotenv>=0.19.0,<2.0.0
+
+# Development and testing
+pytest>=6.0.0,<8.0.0
+jupyter>=1.0.0,<2.0.0
+
+# Optional: For advanced quantum algorithms
+qiskit-algorithms>=0.3.0
+qiskit-optimization>=0.6.0
+
+# Optional: For quantum machine learning
+# qiskit-machine-learning>=0.7.0
+
+# Optional: For quantum finance applications
+# qiskit-finance>=0.4.0
+
+# Optional: For quantum nature/chemistry
+# qiskit-nature>=0.7.0

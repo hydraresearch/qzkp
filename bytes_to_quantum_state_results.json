@@ -1,0 +1,223 @@
+{
+  "test_summary": {
+    "total_tests": 4,
+    "successful_tests": 4,
+    "security_level": 256,
+    "test_type": "bytes_to_quantum_state_ultra_secure_qzkp"
+  },
+  "test_results": [
+    {
+      "test_case": 1,
+      "label": "text_message",
+      "data_preview": "48656c6c6f2c205175616e74756d20576f726c64...",
+      "commitment": {
+        "hash": "646745e2eb643924307f660e8a867b0875b25711304e5e209ac89c8f3d3d4db2",
+        "bytes_length": 21,
+        "security_level": 256,
+        "timestamp": 1748193957546964000
+      },
+      "proof": {
+        "security_level": 256,
+        "soundness_error": "2^-256",
+        "bytes_metadata": {
+          "label": "text_message",
+          "bytes_length": 21,
+          "hash_sha256": "e4c4d673739173999072899c2aeb8063c98af6ad86259779d33bdf8db9914e3f",
+          "conversion_method": "sha256_hash_to_complex_amplitudes"
+        },
+        "quantum_state_metadata": {
+          "dimension": 4,
+          "num_qubits": 2,
+          "norm": 1.0
+        },
+        "execution_metadata": {
+          "job_id": "d0sn57m1wej00088rhn0",
+          "backend": "ibm_brisbane",
+          "execution_time": 7.753899812698364,
+          "circuit_depth": 13,
+          "shots": 1000
+        },
+        "security_guarantees": {
+          "zero_knowledge": true,
+          "bytes_privacy": true,
+          "quantum_state_privacy": true,
+          "soundness_bits": 256,
+          "post_quantum_secure": true,
+          "ultra_secure": true
+        },
+        "timestamp": 1748193957.546968,
+        "signature": "a26d9dd7846222e9836529264ad39bd3b4ad3418f257ba263439353b000ddc44"
+      },
+      "conversion_metadata": {
+        "original_bytes_length": 21,
+        "hash_sha256": "e4c4d673739173999072899c2aeb8063c98af6ad86259779d33bdf8db9914e3f",
+        "label": "text_message",
+        "dimension": 4,
+        "num_qubits": 2,
+        "norm": 1.0,
+        "conversion_method": "sha256_hash_to_complex_amplitudes"
+      },
+      "success": true
+    },
+    {
+      "test_case": 2,
+      "label": "binary_data",
+      "data_preview": "000102030405060708090a0b0c0d0e0f",
+      "commitment": {
+        "hash": "351f709669d0cf9971582e3eed7f3e8ca2440508f1f293ab5c4998c41effe1b7",
+        "bytes_length": 16,
+        "security_level": 256,
+        "timestamp": 1748193966955025000
+      },
+      "proof": {
+        "security_level": 256,
+        "soundness_error": "2^-256",
+        "bytes_metadata": {
+          "label": "binary_data",
+          "bytes_length": 16,
+          "hash_sha256": "be45cb2605bf36bebde684841a28f0fd43c69850a3dce5fedba69928ee3a8991",
+          "conversion_method": "sha256_hash_to_complex_amplitudes"
+        },
+        "quantum_state_metadata": {
+          "dimension": 4,
+          "num_qubits": 2,
+          "norm": 0.9999999999999999
+        },
+        "execution_metadata": {
+          "job_id": "d0sn59x1wej00088rhpg",
+          "backend": "ibm_brisbane",
+          "execution_time": 8.45793890953064,
+          "circuit_depth": 13,
+          "shots": 1000
+        },
+        "security_guarantees": {
+          "zero_knowledge": true,
+          "bytes_privacy": true,
+          "quantum_state_privacy": true,
+          "soundness_bits": 256,
+          "post_quantum_secure": true,
+          "ultra_secure": true
+        },
+        "timestamp": 1748193966.955029,
+        "signature": "eec7d77dd3a457eb306d944fd7061681437e4914f692f28dab6415c73f49bb62"
+      },
+      "conversion_metadata": {
+        "original_bytes_length": 16,
+        "hash_sha256": "be45cb2605bf36bebde684841a28f0fd43c69850a3dce5fedba69928ee3a8991",
+        "label": "binary_data",
+        "dimension": 4,
+        "num_qubits": 2,
+        "norm": 0.9999999999999999,
+        "conversion_method": "sha256_hash_to_complex_amplitudes"
+      },
+      "success": true
+    },
+    {
+      "test_case": 3,
+      "label": "unicode_emojis",
+      "data_preview": "f09f9490f09f8c8cf09f9a8020556c7472612d73...",
+      "commitment": {
+        "hash": "72fd794f7d9058b1848602d08ed49028a9e880b5a6168023bb57798f44435c5b",
+        "bytes_length": 62,
+        "security_level": 256,
+        "timestamp": 1748193975979547000
+      },
+      "proof": {
+        "security_level": 256,
+        "soundness_error": "2^-256",
+        "bytes_metadata": {
+          "label": "unicode_emojis",
+          "bytes_length": 62,
+          "hash_sha256": "546c30d177caaa6fc2b18e70d1653e12614030034cd5d8576b34a47347d3a6b3",
+          "conversion_method": "sha256_hash_to_complex_amplitudes"
+        },
+        "quantum_state_metadata": {
+          "dimension": 4,
+          "num_qubits": 2,
+          "norm": 1.0
+        },
+        "execution_metadata": {
+          "job_id": "d0sn5c57qc70008r9c1g",
+          "backend": "ibm_brisbane",
+          "execution_time": 8.017022848129272,
+          "circuit_depth": 13,
+          "shots": 1000
+        },
+        "security_guarantees": {
+          "zero_knowledge": true,
+          "bytes_privacy": true,
+          "quantum_state_privacy": true,
+          "soundness_bits": 256,
+          "post_quantum_secure": true,
+          "ultra_secure": true
+        },
+        "timestamp": 1748193975.979551,
+        "signature": "8f7c98e70ff156b2ebab96556c04945f5346665edd41a573ac43c1eb32bb69e9"
+      },
+      "conversion_metadata": {
+        "original_bytes_length": 62,
+        "hash_sha256": "546c30d177caaa6fc2b18e70d1653e12614030034cd5d8576b34a47347d3a6b3",
+        "label": "unicode_emojis",
+        "dimension": 4,
+        "num_qubits": 2,
+        "norm": 1.0,
+        "conversion_method": "sha256_hash_to_complex_amplitudes"
+      },
+      "success": true
+    },
+    {
+      "test_case": 4,
+      "label": "cryptographic_hash",
+      "data_preview": "aa2fc771eab103f3f2f8b587e4ee42c5738a3de0...",
+      "commitment": {
+        "hash": "44c0227ea8156c214c8753ee63acb22691c469f6b73bc2e5fa39ca4754eb2ce7",
+        "bytes_length": 32,
+        "security_level": 256,
+        "timestamp": 1748193984904292000
+      },
+      "proof": {
+        "security_level": 256,
+        "soundness_error": "2^-256",
+        "bytes_metadata": {
+          "label": "cryptographic_hash",
+          "bytes_length": 32,
+          "hash_sha256": "de743144327a47aeb45b04bd9c579c99192d7a49866aaf2e0b04f141a0857114",
+          "conversion_method": "sha256_hash_to_complex_amplitudes"
+        },
+        "quantum_state_metadata": {
+          "dimension": 4,
+          "num_qubits": 2,
+          "norm": 1.0
+        },
+        "execution_metadata": {
+          "job_id": "d0sn5ed4mb60008xb320",
+          "backend": "ibm_brisbane",
+          "execution_time": 8.000316143035889,
+          "circuit_depth": 13,
+          "shots": 1000
+        },
+        "security_guarantees": {
+          "zero_knowledge": true,
+          "bytes_privacy": true,
+          "quantum_state_privacy": true,
+          "soundness_bits": 256,
+          "post_quantum_secure": true,
+          "ultra_secure": true
+        },
+        "timestamp": 1748193984.904295,
+        "signature": "87ccb11b634865079f3b6ba5fae9ea852fc373214cb9901d03fd5ec12333a874"
+      },
+      "conversion_metadata": {
+        "original_bytes_length": 32,
+        "hash_sha256": "de743144327a47aeb45b04bd9c579c99192d7a49866aaf2e0b04f141a0857114",
+        "label": "cryptographic_hash",
+        "dimension": 4,
+        "num_qubits": 2,
+        "norm": 1.0,
+        "conversion_method": "sha256_hash_to_complex_amplitudes"
+      },
+      "success": true
+    }
+  ],
+  "timestamp": 1748193984.904376
+}
