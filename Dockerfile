@@ -19,10 +19,9 @@ COPY go.mod go.sum ./
 RUN go mod download
 
 # Copy source code
-COPY quantumzkp/ ./quantumzkp/
+COPY . .
 
 # Build the application
-WORKDIR /app/quantumzkp
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o qzkp .
 
 # Test stage (optional, can be skipped in production builds)
@@ -46,7 +45,8 @@ WORKDIR /app
 COPY --from=builder /app/qzkp .
 
 # Copy documentation (optional)
-COPY --from=builder /app/*.md ./docs/ || true
+RUN mkdir -p ./docs
+COPY --from=builder /app/*.md ./docs/
 
 # Change ownership to non-root user
 RUN chown -R qzkp:qzkp /app
