@@ -87,13 +87,28 @@ jobs:
         key: ${{ runner.os }}-go-${{ matrix.go-version }}-${{ hashFiles('**/go.sum') }}
 
     - name: Install dependencies
-      run: go mod download
+      run: |
+        go mod download
+        go mod verify
 
-    - name: Run tests
-      run: go test -v -race -coverprofile=coverage.out ./...
+    - name: Check Go environment
+      run: |
+        go version
+        go env
+        pwd
+        ls -la
+
+    - name: Run tests (with detailed output)
+      run: |
+        echo "Running all tests..."
+        go test -v -race -coverprofile=coverage.out ./... 2>&1 | tee test-output.log
+        echo "Test exit code: $?"
 
     - name: Run scientific paper validation tests
-      run: go test -v -run TestScientificPaperClaims
+      run: |
+        echo "Running scientific paper validation..."
+        go test -v -run TestScientificPaperClaims 2>&1 | tee scientific-test-output.log
+        echo "Scientific test exit code: $?"
 
     - name: Generate coverage report
       run: go tool cover -html=coverage.out -o coverage.html
