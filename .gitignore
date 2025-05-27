@@ -5,7 +5,6 @@
 .env.production
 *.md
 *.log
-*.pdf
 *.zip
 *.tar.gz
 *.tar
