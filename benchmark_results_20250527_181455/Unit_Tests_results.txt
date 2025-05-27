@@ -1,9 +1,0 @@
-================================
-Benchmark: Unit_Tests
-Timestamp: Tue May 27 18:14:55 EDT 2025
-================================
-
-# github.com/hydraresearch/qzkp/tests/unit
-found packages main (basic_functionality_test.go) and unit (quantum_core_test.go) in /Users/nick/GolandProjects/poc_qzkp_go/quantumzkp/tests/unit
-FAIL	github.com/hydraresearch/qzkp/tests/unit [setup failed]
-FAIL

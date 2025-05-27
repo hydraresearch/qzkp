@@ -1,9 +1,0 @@
-================================
-Test Suite: Integration_Tests
-Timestamp: Tue May 27 18:14:55 EDT 2025
-================================
-
-# github.com/hydraresearch/qzkp/tests/integration
-found packages integration (full_system_test.go) and main (quantum_zkp_integration_test.go) in /Users/nick/GolandProjects/poc_qzkp_go/quantumzkp/tests/integration
-FAIL	github.com/hydraresearch/qzkp/tests/integration [setup failed]
-FAIL

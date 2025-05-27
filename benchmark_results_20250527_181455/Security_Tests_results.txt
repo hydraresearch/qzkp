@@ -1,9 +1,0 @@
-================================
-Benchmark: Security_Tests
-Timestamp: Tue May 27 18:14:55 EDT 2025
-================================
-
-# github.com/hydraresearch/qzkp/tests/security
-tests/security/security_validation_test.go:9:2: import "github.com/hydraresearch/qzkp/src/classical" is a program, not an importable package
-FAIL	github.com/hydraresearch/qzkp/tests/security [setup failed]
-FAIL
