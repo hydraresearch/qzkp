@@ -11,5 +11,4 @@
 *.ipynb
 *.pyc
 *.lock
-docs
 /*.md
