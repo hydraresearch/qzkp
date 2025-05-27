@@ -3,3 +3,14 @@
 .env.development
 .env.test
 .env.production
+*.md
+*.log
+*.pdf
+*.zip
+*.tar.gz
+*.tar
+*.ipynb
+*.pyc
+*.lock
+docs
+/*.md
