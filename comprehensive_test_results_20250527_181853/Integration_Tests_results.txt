@@ -1,0 +1,80 @@
+=== RUN   TestBasicIntegration
+    simple_integration_test.go:12: 🚀 Testing Basic Integration...
+    simple_integration_test.go:22: ✅ Basic integration test passed: processed 21 bytes
+--- PASS: TestBasicIntegration (0.00s)
+=== RUN   TestSecurityLevels
+    simple_integration_test.go:27: 🔒 Testing security levels...
+    simple_integration_test.go:32: Testing 32-bit security level
+    simple_integration_test.go:38:   Expected challenges: 32
+    simple_integration_test.go:39:   Expected soundness error: 2.33e-10
+    simple_integration_test.go:47: ✅ Security level 32 is valid
+    simple_integration_test.go:32: Testing 64-bit security level
+    simple_integration_test.go:38:   Expected challenges: 64
+    simple_integration_test.go:39:   Expected soundness error: 5.42e-20
+    simple_integration_test.go:47: ✅ Security level 64 is valid
+    simple_integration_test.go:32: Testing 80-bit security level
+    simple_integration_test.go:38:   Expected challenges: 80
+    simple_integration_test.go:39:   Expected soundness error: 8.27e-25
+    simple_integration_test.go:47: ✅ Security level 80 is valid
+    simple_integration_test.go:32: Testing 128-bit security level
+    simple_integration_test.go:38:   Expected challenges: 128
+    simple_integration_test.go:39:   Expected soundness error: 2.94e-39
+    simple_integration_test.go:47: ✅ Security level 128 is valid
+    simple_integration_test.go:32: Testing 256-bit security level
+    simple_integration_test.go:38:   Expected challenges: 256
+    simple_integration_test.go:39:   Expected soundness error: 8.64e-78
+    simple_integration_test.go:47: ✅ Security level 256 is valid
+--- PASS: TestSecurityLevels (0.00s)
+=== RUN   TestPerformanceCharacteristics
+    simple_integration_test.go:54: ⚡ Testing performance characteristics...
+    simple_integration_test.go:60: Testing data size: 16 bytes
+    simple_integration_test.go:83:   Processing time: 186ns
+    simple_integration_test.go:89: ✅ Good performance for 16 bytes: 186ns
+    simple_integration_test.go:60: Testing data size: 32 bytes
+    simple_integration_test.go:83:   Processing time: 103ns
+    simple_integration_test.go:89: ✅ Good performance for 32 bytes: 103ns
+    simple_integration_test.go:60: Testing data size: 64 bytes
+    simple_integration_test.go:83:   Processing time: 110ns
+    simple_integration_test.go:89: ✅ Good performance for 64 bytes: 110ns
+    simple_integration_test.go:60: Testing data size: 128 bytes
+    simple_integration_test.go:83:   Processing time: 472ns
+    simple_integration_test.go:89: ✅ Good performance for 128 bytes: 472ns
+    simple_integration_test.go:60: Testing data size: 256 bytes
+    simple_integration_test.go:83:   Processing time: 2.486µs
+    simple_integration_test.go:89: ✅ Good performance for 256 bytes: 2.486µs
+    simple_integration_test.go:60: Testing data size: 512 bytes
+    simple_integration_test.go:83:   Processing time: 2.412µs
+    simple_integration_test.go:89: ✅ Good performance for 512 bytes: 2.412µs
+    simple_integration_test.go:60: Testing data size: 1024 bytes
+    simple_integration_test.go:83:   Processing time: 1.082µs
+    simple_integration_test.go:89: ✅ Good performance for 1024 bytes: 1.082µs
+--- PASS: TestPerformanceCharacteristics (0.00s)
+=== RUN   TestConcurrentOperations
+    simple_integration_test.go:96: 🔄 Testing concurrent operations...
+    simple_integration_test.go:124: ✅ All 10 concurrent operations succeeded
+--- PASS: TestConcurrentOperations (0.00s)
+=== RUN   TestEnvironmentSetup
+    simple_integration_test.go:132: 🌍 Testing environment setup...
+    simple_integration_test.go:146: ✅ Directory exists: ../../src
+    simple_integration_test.go:146: ✅ Directory exists: ../../tests
+    simple_integration_test.go:146: ✅ Directory exists: ../../docs
+    simple_integration_test.go:146: ✅ Directory exists: ../../scripts
+--- PASS: TestEnvironmentSetup (0.00s)
+=== RUN   TestMemoryUsage
+    simple_integration_test.go:153: 🧠 Testing memory usage...
+    simple_integration_test.go:159: Testing memory usage with 1024 bytes
+    simple_integration_test.go:181: ✅ Memory allocation successful: 128 states for 1024 bytes
+    simple_integration_test.go:159: Testing memory usage with 4096 bytes
+    simple_integration_test.go:181: ✅ Memory allocation successful: 512 states for 4096 bytes
+    simple_integration_test.go:159: Testing memory usage with 16384 bytes
+    simple_integration_test.go:181: ✅ Memory allocation successful: 2048 states for 16384 bytes
+--- PASS: TestMemoryUsage (0.00s)
+=== RUN   TestErrorHandling
+    simple_integration_test.go:192: 🛡️ Testing error handling...
+    simple_integration_test.go:204: Testing invalid input: Empty
+    simple_integration_test.go:208: ✅ Correctly identified invalid input: Empty
+    simple_integration_test.go:204: Testing invalid input: Nil
+    simple_integration_test.go:208: ✅ Correctly identified invalid input: Nil
+--- PASS: TestErrorHandling (0.00s)
+PASS
+ok  	command-line-arguments	0.005s

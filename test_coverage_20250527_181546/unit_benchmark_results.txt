@@ -1,0 +1,7 @@
+goos: darwin
+goarch: amd64
+cpu: 12th Gen Intel(R) Core(TM) i3-12100F
+BenchmarkQuantumStateOperations-8   	1000000000	         0.5994 ns/op	       0 B/op	       0 allocs/op
+BenchmarkHashOperations-8           	52431980	        25.20 ns/op	       0 B/op	       0 allocs/op
+BenchmarkEntropyCalculation-8       	signal: interrupt
+FAIL	command-line-arguments	2.474s

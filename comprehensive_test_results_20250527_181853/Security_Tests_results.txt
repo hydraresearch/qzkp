@@ -1,0 +1,55 @@
+=== RUN   TestInformationLeakageDetection
+    comprehensive_security_test.go:14: 🔍 Testing information leakage detection...
+    comprehensive_security_test.go:27: Testing vector 1: AAAAAAAAAAAAAAAA
+    comprehensive_security_test.go:37: ✅ No leakage detected in vector 1
+    comprehensive_security_test.go:27: Testing vector 2: 0123456789ABCDEF
+    comprehensive_security_test.go:37: ✅ No leakage detected in vector 2
+    comprehensive_security_test.go:27: Testing vector 3: FEDCBA9876543210
+    comprehensive_security_test.go:37: ✅ No leakage detected in vector 3
+    comprehensive_security_test.go:27: Testing vector 4: A5A5A5A5A5A5A5A5
+    comprehensive_security_test.go:37: ✅ No leakage detected in vector 4
+    comprehensive_security_test.go:42: ✅ All security tests passed - no information leakage detected
+--- PASS: TestInformationLeakageDetection (0.00s)
+=== RUN   TestZeroKnowledgeProperty
+    comprehensive_security_test.go:54: 🔐 Testing zero-knowledge property...
+    comprehensive_security_test.go:68: ✅ Different secrets produce different commitments
+    comprehensive_security_test.go:80: ✅ Zero-knowledge property validated
+--- PASS: TestZeroKnowledgeProperty (0.00s)
+=== RUN   TestSoundnessProperty
+    comprehensive_security_test.go:85: 🎯 Testing soundness property...
+    comprehensive_security_test.go:91: Testing soundness for 32-bit security
+    comprehensive_security_test.go:95: Expected soundness error for 32-bit: 2.33e-10
+    comprehensive_security_test.go:91: Testing soundness for 64-bit security
+    comprehensive_security_test.go:95: Expected soundness error for 64-bit: 5.42e-20
+    comprehensive_security_test.go:91: Testing soundness for 80-bit security
+    comprehensive_security_test.go:95: Expected soundness error for 80-bit: 8.27e-25
+    comprehensive_security_test.go:91: Testing soundness for 128-bit security
+    comprehensive_security_test.go:95: Expected soundness error for 128-bit: 2.94e-39
+--- PASS: TestSoundnessProperty (0.00s)
+=== RUN   TestCompletenessProperty
+    comprehensive_security_test.go:105: ✅ Testing completeness property...
+    comprehensive_security_test.go:126: ✅ Completeness rate: 100.00% (100/100)
+--- PASS: TestCompletenessProperty (0.00s)
+=== RUN   TestSideChannelResistance
+    comprehensive_security_test.go:132: 🛡️ Testing side-channel resistance...
+    comprehensive_security_test.go:172: ✅ Timing consistency good: variance 5ns (avg: 95ns)
+--- PASS: TestSideChannelResistance (0.00s)
+=== RUN   TestReplayAttackResistance
+    comprehensive_security_test.go:179: 🔄 Testing replay attack resistance...
+    comprehensive_security_test.go:213: ✅ Replay resistance good: 5 unique commitments
+--- PASS: TestReplayAttackResistance (0.00s)
+=== RUN   TestRandomnessQuality
+    comprehensive_security_test.go:221: 🎲 Testing randomness quality...
+    comprehensive_security_test.go:239: ✅ Good entropy: 7.82
+--- PASS: TestRandomnessQuality (0.00s)
+=== RUN   TestCryptographicHashProperties
+    comprehensive_security_test.go:271: 🔐 Testing cryptographic hash properties...
+    comprehensive_security_test.go:281: ✅ Hash function is deterministic
+    comprehensive_security_test.go:308: ✅ Good avalanche effect: 48.8% bits different
+--- PASS: TestCryptographicHashProperties (0.00s)
+=== RUN   TestAttackScenarioSimulation
+    comprehensive_security_test.go:314: ⚔️ Testing attack scenario simulation...
+    comprehensive_security_test.go:336: ✅ No collision found after 1000 attempts
+--- PASS: TestAttackScenarioSimulation (0.00s)
+PASS
+ok  	command-line-arguments	0.005s

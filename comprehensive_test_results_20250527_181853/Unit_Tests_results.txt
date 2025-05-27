@@ -1,0 +1,36 @@
+=== RUN   TestQuantumStateNormalization
+    basic_functionality_test.go:11: 🧮 Testing quantum state normalization...
+    basic_functionality_test.go:28: ✅ State properly normalized: norm = 0.999981
+--- PASS: TestQuantumStateNormalization (0.00s)
+=== RUN   TestComplexNumberOperations
+    basic_functionality_test.go:34: 🔢 Testing complex number operations...
+    basic_functionality_test.go:49: ✅ Complex number operations successful: mag1=0.500000, mag2=0.500000
+--- PASS: TestComplexNumberOperations (0.00s)
+=== RUN   TestByteManipulation
+    basic_functionality_test.go:55: 📊 Testing byte manipulation...
+    basic_functionality_test.go:73: ✅ Byte manipulation successful: 21 bytes processed
+--- PASS: TestByteManipulation (0.00s)
+=== RUN   TestBasicEntropy
+    basic_functionality_test.go:79: 🎲 Testing basic entropy calculation...
+    basic_functionality_test.go:93: ✅ Entropy calculation correct: uniform=3.000000 > non-uniform=1.750000
+--- PASS: TestBasicEntropy (0.00s)
+=== RUN   TestHashOperations
+    basic_functionality_test.go:125: 🔐 Testing hash operations...
+    basic_functionality_test.go:138: ✅ Hash operations successful: different inputs produce different hashes
+    basic_functionality_test.go:146: ✅ Hash consistency verified
+--- PASS: TestHashOperations (0.00s)
+=== RUN   TestRandomGeneration
+    basic_functionality_test.go:162: 🎯 Testing random number generation...
+    basic_functionality_test.go:178: ✅ Random generation produces different results
+    basic_functionality_test.go:188: ✅ Good entropy: entropy1=5.000000, entropy2=5.000000
+--- PASS: TestRandomGeneration (0.00s)
+=== RUN   TestPerformanceCharacteristics
+    basic_functionality_test.go:194: ⚡ Testing performance characteristics...
+    basic_functionality_test.go:217: ✅ Performance test completed: 1000 iterations
+--- PASS: TestPerformanceCharacteristics (0.01s)
+=== RUN   TestEdgeCases
+    basic_functionality_test.go:222: 🔍 Testing edge cases...
+    basic_functionality_test.go:248: ✅ Edge cases handled correctly
+--- PASS: TestEdgeCases (0.00s)
+PASS
+ok  	command-line-arguments	0.011s

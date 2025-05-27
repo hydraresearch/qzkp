@@ -1,0 +1,8 @@
+goos: darwin
+goarch: amd64
+cpu: 12th Gen Intel(R) Core(TM) i3-12100F
+BenchmarkSecurityOperations-8   	16876656	        71.48 ns/op	       0 B/op	       0 allocs/op
+BenchmarkEntropyCalculation-8   	   34806	     34160 ns/op	   18856 B/op	      13 allocs/op
+BenchmarkRandomGeneration-8     	 4513824	       267.5 ns/op	       0 B/op	       0 allocs/op
+PASS
+ok  	command-line-arguments	4.302s

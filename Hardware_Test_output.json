@@ -1,0 +1,195 @@
+{
+  "states": {
+    "bell_state_phi_plus": {
+      "vector": [
+        [
+          0.7071067811865475,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.7071067811865475,
+          0.0
+        ]
+      ],
+      "description": "Bell state |\u03a6+\u27e9",
+      "qubits": 2,
+      "backend": "ibm_brisbane",
+      "fidelity": 0.9806799089698518,
+      "coherence": 0.24999999999999994,
+      "entanglement": 0.5,
+      "metadata": {
+        "circuit_depth": 2,
+        "num_gates": 2,
+        "use_simulator": false
+      }
+    },
+    "ghz_state_3q": {
+      "vector": [
+        [
+          0.7071067811865475,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.7071067811865475,
+          0.0
+        ]
+      ],
+      "description": "3-qubit GHZ state",
+      "qubits": 3,
+      "backend": "ibm_brisbane",
+      "fidelity": 0.9670084134050753,
+      "coherence": 0.12499999999999997,
+      "entanglement": 0.3333333333333333,
+      "metadata": {
+        "circuit_depth": 3,
+        "num_gates": 3,
+        "use_simulator": false
+      }
+    },
+    "w_state_3q": {
+      "vector": [
+        [
+          0.5773502691896257,
+          0.0
+        ],
+        [
+          0.408248290463863,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.408248290463863,
+          0.0
+        ],
+        [
+          0.5773502691896257,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ],
+      "description": "3-qubit W state",
+      "qubits": 3,
+      "backend": "ibm_brisbane",
+      "fidelity": 0.9832724447951368,
+      "coherence": 0.125,
+      "entanglement": 0.6394319446848299,
+      "metadata": {
+        "circuit_depth": 5,
+        "num_gates": 5,
+        "use_simulator": false
+      }
+    },
+    "superposition_2q": {
+      "vector": [
+        [
+          0.4999999999999999,
+          0.0
+        ],
+        [
+          0.4999999999999999,
+          0.0
+        ],
+        [
+          0.4999999999999999,
+          0.0
+        ],
+        [
+          0.4999999999999999,
+          0.0
+        ]
+      ],
+      "description": "2-qubit superposition",
+      "qubits": 2,
+      "backend": "ibm_brisbane",
+      "fidelity": 0.9625876971125984,
+      "coherence": 0.2499999999999999,
+      "entanglement": 0.9999999999999998,
+      "metadata": {
+        "circuit_depth": 1,
+        "num_gates": 2,
+        "use_simulator": false
+      }
+    },
+    "random_state_2q": {
+      "vector": [
+        [
+          -0.030663301314393474,
+          -0.013023306479069898
+        ],
+        [
+          0.6086192346328585,
+          -0.2584925458747021
+        ],
+        [
+          0.7265911648828076,
+          -0.18125766853245354
+        ],
+        [
+          -0.02854167769811953,
+          -0.0071200947735172255
+        ]
+      ],
+      "description": "Random 2-qubit state",
+      "qubits": 2,
+      "backend": "ibm_brisbane",
+      "fidelity": 0.9561892479278365,
+      "coherence": 0.24999999999999997,
+      "entanglement": 0.5047537826789243,
+      "metadata": {
+        "circuit_depth": 3,
+        "num_gates": 5,
+        "use_simulator": false
+      }
+    }
+  },
+  "generated_at": "2025-05-27T22:38:42",
+  "backend": "ibm_brisbane",
+  "use_simulator": false,
+  "total_states": 5
+}

@@ -1,0 +1,14 @@
+{
+  "hardware_validation_summary": {
+    "total_tests": 0,
+    "successful_tests": 0,
+    "timeout_tests": 0,
+    "failed_tests": 0,
+    "success_rate": 0,
+    "avg_execution_time": 0,
+    "backend_used": "N/A",
+    "timestamp": "2025-05-27T18:35:14.277886",
+    "job_ids": []
+  },
+  "hardware_test_results": []
+}

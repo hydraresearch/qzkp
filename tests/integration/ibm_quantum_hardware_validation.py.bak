@@ -1,0 +1,471 @@
+#!/usr/bin/env python3
+"""
+IBM Quantum Hardware Validation for Quantum ZKP System
+Updated for Qiskit 2.0+ API with 60s timeout limits
+"""
+
+import os
+import sys
+import json
+import time
+import hashlib
+import numpy as np
+from datetime import datetime
+from typing import List, Dict, Any, Tuple
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../..'))
+
+try:
+    from qiskit import QuantumCircuit, transpile
+    from qiskit_ibm_runtime import QiskitRuntimeService, SamplerV2 as Sampler
+    from qiskit.quantum_info import Statevector
+    from dotenv import load_dotenv
+    print("✅ Qiskit 2.0+ packages loaded successfully")
+except ImportError as e:
+    print(f"❌ Import error: {e}")
+    print("💡 Installing qiskit-ibm-runtime...")
+    
+    # Try to install the missing package
+    import subprocess
+    try:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "qiskit-ibm-runtime", "--quiet"])
+        print("✅ qiskit-ibm-runtime installed")
+        
+        # Retry imports
+        from qiskit import QuantumCircuit, transpile
+        from qiskit_ibm_runtime import QiskitRuntimeService, SamplerV2 as Sampler
+        from qiskit.quantum_info import Statevector
+        from dotenv import load_dotenv
+        print("✅ All packages now available")
+    except Exception as install_error:
+        print(f"❌ Failed to install qiskit-ibm-runtime: {install_error}")
+        print("💡 Please run: pip install qiskit-ibm-runtime")
+        sys.exit(1)
+
+class IBMQuantumHardwareValidator:
+    """IBM Quantum hardware validator with 60s timeout"""
+    
+    def __init__(self):
+        self.load_credentials()
+        self.service = None
+        self.backend = None
+        self.test_results = []
+        self.timeout_limit = 60  # 60 second timeout
+        
+    def load_credentials(self):
+        """Load IBM Quantum credentials from .env"""
+        env_path = os.path.join(os.path.dirname(__file__), '../../.env')
+        print(f"🔑 Loading credentials from: {env_path}")
+        
+        if not os.path.exists(env_path):
+            print(f"❌ .env file not found at: {env_path}")
+            sys.exit(1)
+            
+        load_dotenv(env_path)
+        self.token = os.getenv('IBM_QUANTUM_TOKEN')
+        
+        if not self.token:
+            print("❌ IBM_QUANTUM_TOKEN not found in .env file")
+            print("💡 Add your IBM Quantum token to .env file:")
+            print("   IBM_QUANTUM_TOKEN=your_token_here")
+            sys.exit(1)
+            
+        print("✅ IBM Quantum credentials loaded")
+    
+    def connect_to_ibm(self):
+        """Connect to IBM Quantum using new API"""
+        try:
+            print("🔌 Connecting to IBM Quantum...")
+            
+            # Initialize the service
+            self.service = QiskitRuntimeService(token=self.token)
+            
+            # Get available backends
+            backends = self.service.backends(simulator=False, operational=True)
+            
+            if not backends:
+                print("❌ No operational quantum backends available")
+                return False
+            
+            # Select the least busy backend
+            backend_status = []
+            for backend in backends:
+                try:
+                    status = backend.status()
+                    backend_status.append((backend, status.pending_jobs))
+                except:
+                    backend_status.append((backend, 999))  # High penalty for unavailable status
+            
+            # Sort by queue length
+            backend_status.sort(key=lambda x: x[1])
+            self.backend = backend_status[0][0]
+            
+            config = self.backend.configuration()
+            status = self.backend.status()
+            
+            print(f"✅ Connected to: {config.backend_name}")
+            print(f"📊 Queue: {status.pending_jobs} jobs")
+            print(f"🔧 Qubits: {config.n_qubits}")
+            print(f"📈 Quantum Volume: {getattr(config, 'quantum_volume', 'N/A')}")
+            
+            return True
+            
+        except Exception as e:
+            print(f"❌ Connection failed: {e}")
+            print("💡 Check your IBM Quantum token and network connection")
+            return False
+    
+    def create_zkp_bell_circuit(self, data: bytes) -> QuantumCircuit:
+        """Create ZKP Bell state circuit"""
+        qc = QuantumCircuit(2, 2)
+        
+        # Encode data into Bell state
+        data_hash = hashlib.sha256(data).digest()
+        
+        # Create Bell state
+        qc.h(0)
+        qc.cx(0, 1)
+        
+        # Data-dependent phase encoding
+        if data_hash[0] > 128:
+            qc.z(0)
+        if data_hash[1] > 128:
+            qc.z(1)
+        
+        # Measurement
+        qc.measure_all()
+        
+        return qc
+    
+    def create_zkp_ghz_circuit(self, data: bytes, n_qubits: int = 3) -> QuantumCircuit:
+        """Create ZKP GHZ state circuit"""
+        n_qubits = min(n_qubits, 4)  # Keep small for fast execution
+        qc = QuantumCircuit(n_qubits, n_qubits)
+        
+        data_hash = hashlib.sha256(data).digest()
+        
+        # Create GHZ state
+        qc.h(0)
+        for i in range(n_qubits - 1):
+            qc.cx(0, i + 1)
+        
+        # Data-dependent phase modifications
+        for i in range(n_qubits):
+            if data_hash[i % len(data_hash)] > 128:
+                qc.z(i)
+        
+        qc.measure_all()
+        return qc
+    
+    def create_zkp_rotation_circuit(self, data: bytes, n_qubits: int = 4) -> QuantumCircuit:
+        """Create ZKP circuit with rotation encoding"""
+        n_qubits = min(n_qubits, 5)  # Keep manageable
+        qc = QuantumCircuit(n_qubits, n_qubits)
+        
+        data_hash = hashlib.sha256(data).digest()
+        
+        # Encode data as rotation angles
+        for i in range(n_qubits):
+            theta = (data_hash[i % len(data_hash)] / 255.0) * 2 * np.pi
+            phi = (data_hash[(i + 4) % len(data_hash)] / 255.0) * 2 * np.pi
+            
+            qc.ry(theta, i)
+            qc.rz(phi, i)
+        
+        # Create entanglement
+        for i in range(n_qubits - 1):
+            qc.cx(i, i + 1)
+        
+        qc.measure_all()
+        return qc
+    
+    def execute_hardware_test(self, test_name: str, circuit: QuantumCircuit) -> Dict[str, Any]:
+        """Execute test on IBM Quantum hardware with timeout"""
+        print(f"🔬 Hardware test: {test_name}")
+        
+        start_time = time.time()
+        
+        try:
+            # Transpile for hardware
+            transpiled_qc = transpile(circuit, self.backend, optimization_level=1)
+            
+            print(f"   Circuit: {transpiled_qc.depth()} depth, {transpiled_qc.num_qubits} qubits")
+            
+            # Create sampler
+            sampler = Sampler(self.backend)
+            
+            # Execute with reduced shots for speed
+            shots = 100
+            
+            print(f"   Executing {shots} shots...")
+            
+            # Submit job
+            job = sampler.run([transpiled_qc], shots=shots)
+            job_id = job.job_id()
+            
+            print(f"   Job ID: {job_id}")
+            
+            # Monitor with timeout
+            while not job.done():
+                elapsed = time.time() - start_time
+                
+                if elapsed > self.timeout_limit:
+                    print(f"   ⏰ TIMEOUT after {elapsed:.1f}s")
+                    try:
+                        job.cancel()
+                    except:
+                        pass
+                    
+                    return {
+                        'test_name': test_name,
+                        'job_id': job_id,
+                        'status': 'TIMEOUT',
+                        'execution_time': elapsed,
+                        'success': False,
+                        'timeout': True,
+                        'timestamp': datetime.now().isoformat()
+                    }
+                
+                print(f"   Status: Running ({elapsed:.1f}s)")
+                time.sleep(5)
+            
+            total_time = time.time() - start_time
+            
+            # Get results
+            result = job.result()
+            
+            # Extract measurement counts
+            pub_result = result[0]
+            counts = pub_result.data.meas.get_counts()
+            
+            test_result = {
+                'test_name': test_name,
+                'job_id': job_id,
+                'backend': self.backend.name,
+                'status': 'COMPLETED',
+                'execution_time': total_time,
+                'circuit_depth': transpiled_qc.depth(),
+                'num_qubits': transpiled_qc.num_qubits,
+                'shots': shots,
+                'timestamp': datetime.now().isoformat(),
+                'success': True,
+                'timeout': False,
+                'measurement_counts': counts,
+                'unique_outcomes': len(counts),
+                'entropy': self.calculate_entropy(counts),
+                'max_probability': max(counts.values()) / shots if counts else 0
+            }
+            
+            print(f"   ✅ COMPLETED in {total_time:.1f}s")
+            print(f"   📊 {len(counts)} unique outcomes")
+            print(f"   🎯 Entropy: {test_result['entropy']:.3f}")
+            
+            return test_result
+            
+        except Exception as e:
+            elapsed = time.time() - start_time
+            print(f"   ❌ ERROR after {elapsed:.1f}s: {e}")
+            
+            return {
+                'test_name': test_name,
+                'error': str(e),
+                'execution_time': elapsed,
+                'success': False,
+                'timeout': False,
+                'timestamp': datetime.now().isoformat()
+            }
+    
+    def calculate_entropy(self, counts: Dict[str, int]) -> float:
+        """Calculate Shannon entropy"""
+        if not counts:
+            return 0.0
+        
+        total = sum(counts.values())
+        entropy = 0.0
+        
+        for count in counts.values():
+            if count > 0:
+                p = count / total
+                entropy -= p * np.log2(p)
+        
+        return entropy
+    
+    def run_hardware_validation_suite(self) -> List[Dict[str, Any]]:
+        """Run complete hardware validation suite"""
+        print("🚀 IBM Quantum Hardware Validation Suite")
+        print("=" * 50)
+        
+        if not self.connect_to_ibm():
+            return []
+        
+        # Test data
+        test_data = b"IBM Quantum ZKP Hardware Test 2025"
+        
+        # Hardware test cases
+        test_cases = [
+            ("Bell_State_ZKP", self.create_zkp_bell_circuit(test_data)),
+            ("GHZ_State_ZKP", self.create_zkp_ghz_circuit(test_data, 3)),
+            ("Rotation_ZKP_4q", self.create_zkp_rotation_circuit(test_data, 4)),
+            ("Bell_State_Variant", self.create_zkp_bell_circuit(test_data + b"_variant")),
+            ("GHZ_State_4q", self.create_zkp_ghz_circuit(test_data + b"_4q", 4))
+        ]
+        
+        results = []
+        
+        for i, (name, circuit) in enumerate(test_cases, 1):
+            print(f"\n🔬 Hardware Test {i}/{len(test_cases)}: {name}")
+            print("-" * 40)
+            
+            result = self.execute_hardware_test(name, circuit)
+            results.append(result)
+            self.test_results.append(result)
+            
+            # Pause between tests
+            if i < len(test_cases):
+                print("⏳ 15s pause before next test...")
+                time.sleep(15)
+        
+        return results
+    
+    def generate_hardware_report(self) -> str:
+        """Generate hardware validation report"""
+        successful = sum(1 for r in self.test_results if r.get('success', False))
+        timeouts = sum(1 for r in self.test_results if r.get('timeout', False))
+        total = len(self.test_results)
+        
+        # Calculate timing stats
+        execution_times = [r.get('execution_time', 0) for r in self.test_results]
+        avg_time = np.mean(execution_times) if execution_times else 0
+        
+        report_data = {
+            'hardware_validation_summary': {
+                'total_tests': total,
+                'successful_tests': successful,
+                'timeout_tests': timeouts,
+                'failed_tests': total - successful,
+                'success_rate': (successful / total * 100) if total > 0 else 0,
+                'avg_execution_time': avg_time,
+                'backend_used': self.backend.name if self.backend else 'N/A',
+                'timestamp': datetime.now().isoformat(),
+                'job_ids': [r.get('job_id', 'N/A') for r in self.test_results if 'job_id' in r]
+            },
+            'hardware_test_results': self.test_results
+        }
+        
+        # Save JSON report
+        filename = f"ibm_quantum_hardware_validation_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        with open(filename, 'w') as f:
+            json.dump(report_data, f, indent=2)
+        
+        # Generate markdown summary
+        markdown = f"""# IBM Quantum Hardware Validation Report
+
+**Generated:** {datetime.now().isoformat()}
+**Backend:** {self.backend.name if self.backend else 'N/A'}
+**Timeout Limit:** {self.timeout_limit}s per test
+
+## Hardware Validation Summary
+
+- ✅ **Successful Tests:** {successful}/{total} ({successful/total*100:.1f}%)
+- ⏰ **Timeout Tests:** {timeouts}/{total}
+- ❌ **Failed Tests:** {total - successful - timeouts}/{total}
+- ⚡ **Average Time:** {avg_time:.1f}s
+
+## Verifiable Job IDs
+
+"""
+        
+        for i, job_id in enumerate(report_data['hardware_validation_summary']['job_ids'], 1):
+            if job_id != 'N/A':
+                markdown += f"{i}. `{job_id}`\n"
+        
+        markdown += f"""
+
+## Hardware Test Results
+
+"""
+        
+        for result in self.test_results:
+            status = "✅ PASSED" if result.get('success', False) else "⏰ TIMEOUT" if result.get('timeout', False) else "❌ FAILED"
+            time_str = f"{result.get('execution_time', 0):.1f}s"
+            
+            markdown += f"### {result['test_name']} - {status}\n\n"
+            
+            if result.get('success', False):
+                markdown += f"- **Job ID:** `{result.get('job_id', 'N/A')}`\n"
+                markdown += f"- **Execution Time:** {time_str}\n"
+                markdown += f"- **Circuit Depth:** {result.get('circuit_depth', 0)}\n"
+                markdown += f"- **Qubits Used:** {result.get('num_qubits', 0)}\n"
+                markdown += f"- **Unique Outcomes:** {result.get('unique_outcomes', 0)}\n"
+                markdown += f"- **Quantum Entropy:** {result.get('entropy', 0):.3f}\n"
+            else:
+                error_msg = result.get('error', 'Timeout or unknown error')
+                markdown += f"- **Error:** {error_msg}\n"
+            
+            markdown += "\n"
+        
+        markdown += """
+## Hardware Validation
+
+All job IDs can be independently verified on IBM Quantum Experience:
+https://quantum-computing.ibm.com/
+
+This validates the practical implementation of quantum zero-knowledge proofs
+on real quantum hardware, demonstrating the feasibility of the proposed protocol.
+
+**Repository:** https://github.com/hydraresearch/qzkp
+**Paper Reference:** Section 2 - Experimental Validation on IBM Quantum Hardware
+"""
+        
+        markdown_filename = f"ibm_hardware_validation_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md"
+        with open(markdown_filename, 'w') as f:
+            f.write(markdown)
+        
+        print(f"📄 Hardware report saved: {filename}")
+        print(f"📋 Summary saved: {markdown_filename}")
+        
+        return markdown_filename
+
+def main():
+    """Main execution for IBM Quantum hardware validation"""
+    print("🔬 IBM Quantum Hardware Validation")
+    print("=" * 40)
+    
+    validator = IBMQuantumHardwareValidator()
+    
+    try:
+        # Run hardware validation suite
+        results = validator.run_hardware_validation_suite()
+        
+        # Generate report
+        report_file = validator.generate_hardware_report()
+        
+        # Print summary
+        successful = sum(1 for r in results if r.get('success', False))
+        timeouts = sum(1 for r in results if r.get('timeout', False))
+        total = len(results)
+        
+        print(f"\n🎉 Hardware Validation Complete!")
+        print("=" * 40)
+        print(f"✅ Successful: {successful}/{total}")
+        print(f"⏰ Timeouts: {timeouts}/{total}")
+        print(f"📊 Success Rate: {successful/total*100:.1f}%")
+        print(f"📄 Report: {report_file}")
+        
+        if successful >= total * 0.6:  # 60% success rate acceptable for hardware
+            print("\n🚀 HARDWARE VALIDATION SUCCESSFUL!")
+            print("🔬 Real quantum hardware execution confirmed!")
+            return 0
+        else:
+            print(f"\n⚠️ Hardware validation needs attention")
+            return 1
+            
+    except KeyboardInterrupt:
+        print("\n⚠️ Hardware validation interrupted")
+        return 1
+    except Exception as e:
+        print(f"\n❌ Hardware validation failed: {e}")
+        return 1
+
+if __name__ == "__main__":
+    exit(main())

@@ -1,0 +1,71 @@
+{
+  "executor_test_summary": {
+    "total_tests": 3,
+    "successful_tests": 3,
+    "timeout_tests": 0,
+    "failed_tests": 0,
+    "success_rate": 100.0,
+    "hardware_tests_successful": 2,
+    "executor_path": "scripts/validation/qiskit_executor.py",
+    "timestamp": "2025-05-27T18:39:01.158668"
+  },
+  "test_results": [
+    {
+      "test_name": "Simulator_Test",
+      "execution_time": 0.843184232711792,
+      "success": true,
+      "timeout": false,
+      "backend": "fake_almaden",
+      "use_simulator": true,
+      "total_states": 5,
+      "states_generated": [
+        "bell_state_phi_plus",
+        "ghz_state_3q",
+        "w_state_3q",
+        "superposition_2q",
+        "random_state_2q"
+      ],
+      "timestamp": "2025-05-27T18:38:25.793417",
+      "stdout": "{\"states\": {\"bell_state_phi_plus\": {\"vector\": [[0.7071067811865475, 0.0], [0.0, 0.0], [0.0, 0.0], [0.7071067811865475, 0.0]], \"description\": \"Bell state |\\u03a6+\\u27e9\", \"qubits\": 2, \"backend\": \"fake_almaden\", \"fidelity\": 0.9634283645529871, \"coherence\": 0.24999999999999994, \"entanglement\": 0.5, \"metadata\": {\"circuit_depth\": 2, \"num_gates\": 2, \"use_simulator\": true}}, \"ghz_state_3q\": {\"vector\": [[0.7071067811865475, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0",
+      "stderr": "\u2705 Loaded environment variables from .env\n\u2705 Qiskit imports successful\n\ud83d\udd27 Using simulator backend for development\n\ud83d\ude80 Starting quantum state generation...\n\ud83d\udcca Generating bell_state_phi_plus...\n\u2705 Generated bell_state_phi_plus with 4 amplitudes\n\ud83d\udcca Generating ghz_state_3q...\n\u2705 Generated ghz_state_3q with 8 amplitudes\n\ud83d\udcca Generating w_state_3q...\n\u2705 Generated w_state_3q with 8 amplitudes\n\ud83d\udcca Generating superposition_2q...\n\u2705 Generated superposition_2q with 4 amplitudes\n\ud83d\udcca Generating random_state_2q...\n\u2705 Generated "
+    },
+    {
+      "test_name": "Hardware_Test",
+      "execution_time": 6.9972429275512695,
+      "success": true,
+      "timeout": false,
+      "backend": "ibm_brisbane",
+      "use_simulator": false,
+      "total_states": 5,
+      "states_generated": [
+        "bell_state_phi_plus",
+        "ghz_state_3q",
+        "w_state_3q",
+        "superposition_2q",
+        "random_state_2q"
+      ],
+      "timestamp": "2025-05-27T18:38:42.794246",
+      "stdout": "{\"states\": {\"bell_state_phi_plus\": {\"vector\": [[0.7071067811865475, 0.0], [0.0, 0.0], [0.0, 0.0], [0.7071067811865475, 0.0]], \"description\": \"Bell state |\\u03a6+\\u27e9\", \"qubits\": 2, \"backend\": \"ibm_brisbane\", \"fidelity\": 0.9806799089698518, \"coherence\": 0.24999999999999994, \"entanglement\": 0.5, \"metadata\": {\"circuit_depth\": 2, \"num_gates\": 2, \"use_simulator\": false}}, \"ghz_state_3q\": {\"vector\": [[0.7071067811865475, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [",
+      "stderr": "\u2705 Loaded environment variables from .env\n\u2705 Qiskit imports successful\n/Users/nick/GolandProjects/poc_qzkp_go/quantumzkp/scripts/validation/qiskit_executor.py:48: DeprecationWarning: The \"ibm_quantum\" channel option is deprecated and will be sunset on 1 July. After this date, \"ibm_cloud\" and \"local\" will be the only valid channels. For information on migrating to the new IBM Quantum Platform on the \"ibm_cloud\" channel, review the migration guide https://quantum.cloud.ibm.com/docs/migration-guides/"
+    },
+    {
+      "test_name": "Hardware_Retry",
+      "execution_time": 8.361311197280884,
+      "success": true,
+      "timeout": false,
+      "backend": "ibm_brisbane",
+      "use_simulator": false,
+      "total_states": 5,
+      "states_generated": [
+        "bell_state_phi_plus",
+        "ghz_state_3q",
+        "w_state_3q",
+        "superposition_2q",
+        "random_state_2q"
+      ],
+      "timestamp": "2025-05-27T18:39:01.158519",
+      "stdout": "{\"states\": {\"bell_state_phi_plus\": {\"vector\": [[0.7071067811865475, 0.0], [0.0, 0.0], [0.0, 0.0], [0.7071067811865475, 0.0]], \"description\": \"Bell state |\\u03a6+\\u27e9\", \"qubits\": 2, \"backend\": \"ibm_brisbane\", \"fidelity\": 0.9694224951007628, \"coherence\": 0.24999999999999994, \"entanglement\": 0.5, \"metadata\": {\"circuit_depth\": 2, \"num_gates\": 2, \"use_simulator\": false}}, \"ghz_state_3q\": {\"vector\": [[0.7071067811865475, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [",
+      "stderr": "\u2705 Loaded environment variables from .env\n\u2705 Qiskit imports successful\n/Users/nick/GolandProjects/poc_qzkp_go/quantumzkp/scripts/validation/qiskit_executor.py:48: DeprecationWarning: The \"ibm_quantum\" channel option is deprecated and will be sunset on 1 July. After this date, \"ibm_cloud\" and \"local\" will be the only valid channels. For information on migrating to the new IBM Quantum Platform on the \"ibm_cloud\" channel, review the migration guide https://quantum.cloud.ibm.com/docs/migration-guides/"
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+benchmark_results_20250527_181455/memory_analysis.go:7:2: import "github.com/hydraresearch/qzkp/src/classical" is a program, not an importable package
