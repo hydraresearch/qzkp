@@ -17,8 +17,6 @@ header-includes:
 
 **GitHub:** https://github.com/nicksdigital/
 
-**Affiliation:** Hydra Research & Labs
-
 **Date:** May 24th, 2025
 
 ## Abstract
@@ -121,6 +119,44 @@ Our framework addresses several key security challenges in quantum zero-knowledg
 
 We developed a comprehensive testing framework to quantify information leakage:
 
+### 3.3 Information Leakage Analysis
+
+**Methodology**:
+1. Generate distinctive quantum state vectors
+2. Create proofs using target implementation
+3. Analyze proof data for state vector components
+4. Calculate leakage percentage
+
+**Results**:
+- **Insecure Implementation**: 75% leakage rate (catastrophic failure)
+- **Secure Implementation**: 0% leakage rate (perfect zero-knowledge)
+
+### 3.4 Attack Scenarios
+
+#### 3.4.1 State Reconstruction Attack
+
+**Objective**: Reconstruct quantum state from proof data
+
+**Method**:
+1. Extract serialized state vectors from proof
+2. Reconstruct quantum state amplitudes
+3. Verify reconstruction accuracy
+
+**Success Rate**: 100% against naive implementations
+
+#### 3.4.2 Commitment Inversion Attack
+
+**Objective**: Reverse commitment to reveal quantum measurements
+
+**Method**:
+1. Analyze commitment patterns
+2. Exploit deterministic generation
+3. Brute-force search space
+
+**Success Rate**: 85% against weak commitment schemes
+
+\newpage
+
 ## 4. Probabilistic Entanglement Framework
 
 ### 4.1 Theoretical Foundations
@@ -138,6 +174,8 @@ The key insight of our approach is that instead of hiding information computatio
 
 #### 4.1.2 Mathematical Formulation
 
+\needspace{6\baselineskip}
+
 **Step 1: Probabilistic Encoding**
 
 Given a classical bitstring $d \in \{0,1\}^n$, we define the encoding function:
@@ -145,6 +183,8 @@ Given a classical bitstring $d \in \{0,1\}^n$, we define the encoding function:
 $$\psi_d = \frac{1}{\sqrt{Z}} \sum_{x\in\{0,1\}^n} f(x,d)|x\rangle$$
 
 where $f(x,d)$ is a carefully constructed function that embeds $d$ into the quantum state, and $Z$ is a normalization factor.
+
+\needspace{6\baselineskip}
 
 **Step 2: Quantum State Formation**
 
@@ -154,6 +194,8 @@ $$|\psi_{proof}\rangle = \frac{1}{\sqrt{2}}(|0\rangle|\psi_d\rangle + |1\rangle 
 
 where $U$ is a unitary transformation implementing the verification procedure.
 
+\needspace{6\baselineskip}
+
 **Step 3: Logical Entanglement**
 
 We define two quantum observables $\mathcal{O}_s$ (secret) and $\mathcal{O}_v$ (validity) that are quantum mechanically orthogonal:
@@ -161,6 +203,8 @@ We define two quantum observables $\mathcal{O}_s$ (secret) and $\mathcal{O}_v$ (
 $$[\mathcal{O}_s, \mathcal{O}_v] = 0$$
 
 This orthogonality ensures that measuring validity does not collapse the secret state.
+
+\needspace{8\baselineskip}
 
 **Step 4: Quantum Verification**
 
@@ -194,6 +238,8 @@ The framework is secure against both classical and quantum adversaries due to:
 
 #### 4.3.1 Quantum Circuit Design
 
+\needspace{10\baselineskip}
+
 ```python
 def create_qzkp_circuit(data_bytes, security_level=256):
     """
@@ -213,6 +259,8 @@ def create_qzkp_circuit(data_bytes, security_level=256):
 
 #### 4.3.2 Performance Metrics
 
+\needspace{6\baselineskip}
+
 | Security Level | Qubits | Gate Count | Proof Size |
 |---------------|--------|------------|------------|
 | 128-bit       | 16     | 2,048      | 13.5KB     |
@@ -229,6 +277,8 @@ We validated our framework on IBM Quantum hardware with the following results:
 
 ### 4.5 Comparison with Existing Work
 
+\needspace{8\baselineskip}
+
 | Aspect | Prior Work [8] | Our Work |
 |--------|----------------|----------|
 | Security Basis | Computational | Information-Theoretic |
@@ -237,47 +287,11 @@ We validated our framework on IBM Quantum hardware with the following results:
 | Verification Time | O(n²) | O(1) |
 | Implementation | Theoretical | Production-Ready |
 
-## 5. Security Analysis of Existing Implementations (continued)
-
-**Methodology**:
-1. Generate distinctive quantum state vectors
-2. Create proofs using target implementation
-3. Analyze proof data for state vector components
-4. Calculate leakage percentage
-
-**Results**:
-- **Insecure Implementation**: 75% leakage rate (catastrophic failure)
-- **Secure Implementation**: 0% leakage rate (perfect zero-knowledge)
-
-### 3.3 Attack Scenarios
-
-#### 3.3.1 State Reconstruction Attack
-
-**Objective**: Reconstruct quantum state from proof data
-
-**Method**:
-1. Extract serialized state vectors from proof
-2. Reconstruct quantum state amplitudes
-3. Verify reconstruction accuracy
-
-**Success Rate**: 100% against naive implementations
-
-#### 3.3.2 Commitment Inversion Attack
-
-**Objective**: Reverse commitment to reveal quantum measurements
-
-**Method**:
-1. Analyze commitment patterns
-2. Exploit deterministic generation
-3. Brute-force search space
-
-**Success Rate**: 85% against weak commitment schemes
-
 \newpage
 
-## 4. Secure Implementation Design
+## 5. Secure Implementation Design
 
-### 4.1 SecureQuantumZKP Protocol
+### 5.1 SecureQuantumZKP Protocol
 
 We designed SecureQuantumZKP to address all identified vulnerabilities:
 
@@ -300,7 +314,7 @@ SecureProof {
 }
 ```
 
-### 4.2 Cryptographic Components
+### 5.2 Cryptographic Components
 
 **Hash Functions**:
 - SHA-256: Primary hash function for commitments
@@ -317,36 +331,38 @@ SecureProof {
 - SHA-256/BLAKE3 for commitments
 - Resistant to quantum computer attacks
 
-### 4.3 Security Properties
+### 5.3 Security Properties
 
-**Completeness**: Valid proofs accepted with probability >= 1 - 2^(-lambda)
+**Completeness**: Valid proofs accepted with probability $\geq 1 - 2^{-\lambda}$
 
-**Soundness**: Invalid proofs rejected with probability >= 1 - epsilon, where epsilon <= 2^(-k) for k challenges
+**Soundness**: Invalid proofs rejected with probability $\geq 1 - \epsilon$, where $\epsilon \leq 2^{-k}$ for $k$ challenges
 
 **Zero-Knowledge**: Simulator indistinguishable from real proofs under computational assumptions
 
 \newpage
 
-## 5. Performance Analysis
+## 6. Performance Analysis
 
-### 5.1 Proof Size Analysis
+### 6.1 Proof Size Analysis
 
 We analyzed proof sizes across different security levels:
 
 **Results**:
 
+\needspace{10\baselineskip}
+
 | Security Level | Challenges | Proof Size | Soundness Error |
 |---------------|------------|------------|-----------------|
-| 32-bit | 32 | 13.5 KB | 2.33 x 10^(-10) |
-| 64-bit | 64 | 17.6 KB | 5.42 x 10^(-20) |
-| 80-bit | 80 | 19.6 KB | 8.27 x 10^(-25) |
-| 96-bit | 96 | 21.6 KB | 1.26 x 10^(-29) |
-| 128-bit | 128 | 25.7 KB | 2.94 x 10^(-39) |
-| 256-bit | 256 | 41.9 KB | 8.64 x 10^(-78) |
+| 32-bit | 32 | 13.5 KB | $2.33 \times 10^{-10}$ |
+| 64-bit | 64 | 17.6 KB | $5.42 \times 10^{-20}$ |
+| 80-bit | 80 | 19.6 KB | $8.27 \times 10^{-25}$ |
+| 96-bit | 96 | 21.6 KB | $1.26 \times 10^{-29}$ |
+| 128-bit | 128 | 25.7 KB | $2.94 \times 10^{-39}$ |
+| 256-bit | 256 | 41.9 KB | $8.64 \times 10^{-78}$ |
 
 **Analysis**: Proof sizes scale linearly with security level while maintaining practical deployment constraints.
 
-### 5.2 Performance Benchmarking
+### 6.2 Performance Benchmarking
 
 **Generation Performance**:
 - 80-bit security: 0.57ms average generation time
@@ -358,6 +374,8 @@ We analyzed proof sizes across different security levels:
 - Constant-time verification independent of security level
 
 **Comparison with Other ZK Systems**:
+
+\needspace{8\baselineskip}
 
 | System | Proof Size | Gen Time | Ver Time | Post-Quantum |
 |--------|------------|----------|----------|--------------|
@@ -374,7 +392,7 @@ We analyzed proof sizes across different security levels:
 
 \needspace{4\baselineskip}
 
-## 6. Conclusion
+## 7. Conclusion
 
 This work presents the first secure implementation of quantum zero-knowledge proofs, addressing critical vulnerabilities in existing approaches. Our SecureQuantumZKP protocol achieves perfect zero-knowledge, practical performance, post-quantum security, and production readiness.
 
@@ -543,16 +561,16 @@ func DetectInformationLeakage(proof []byte, originalState QuantumState) float64 
 ### B.3 Soundness Error Analysis
 
 **Mathematical Foundation**:
-For k independent challenges, the probability that a cheating prover succeeds is:
+For $k$ independent challenges, the probability that a cheating prover succeeds is:
 
-P(cheat_success) = (1/2)^k
+$$P(\text{cheat\_success}) = \left(\frac{1}{2}\right)^k$$
 
 **Security Level Mapping**:
-- 32-bit security: 2^(-32) = 2.33 × 10^(-10)
-- 64-bit security: 2^(-64) = 5.42 × 10^(-20)
-- 80-bit security: 2^(-80) = 8.27 × 10^(-25)
-- 128-bit security: 2^(-128) = 2.94 × 10^(-39)
-- 256-bit security: 2^(-256) = 8.64 × 10^(-78)
+- 32-bit security: $2^{-32} = 2.33 \times 10^{-10}$
+- 64-bit security: $2^{-64} = 5.42 \times 10^{-20}$
+- 80-bit security: $2^{-80} = 8.27 \times 10^{-25}$
+- 128-bit security: $2^{-128} = 2.94 \times 10^{-39}$
+- 256-bit security: $2^{-256} = 8.64 \times 10^{-78}$
 
 ## Appendix C: Performance Benchmarks
 

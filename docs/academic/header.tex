@@ -1,62 +1,82 @@
-% header.tex - Academic paper on Quantum Zero-Knowledge Proofs
-\documentclass[11pt,a4paper]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[margin=1in]{geometry}
-\usepackage{graphicx}
-\usepackage{booktabs}
+% header.tex - LaTeX packages for Quantum Zero-Knowledge Proofs
 \usepackage{amsmath,amssymb}
-\usepackage{hyperref}
-\usepackage{parskip}
-\usepackage{setspace}
+\usepackage{braket}
 \usepackage{needspace}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+
+% Font configuration
+\setmainfont{Times New Roman}[
+  Ligatures=TeX,
+  Numbers=OldStyle
+]
+\setsansfont{Helvetica Neue}[
+  Scale=MatchLowercase,
+  Ligatures=TeX
+]
+\setmonofont{Menlo}[
+  Scale=MatchLowercase
+]
+
+% Math font with Unicode support
+\setmathfont{Latin Modern Math}
+\setmathfont[range={\mathup/{greek,Greek}}]{Arial Unicode MS}
+\setmathfont[range={\mathit/{greek,Greek}}]{Arial Unicode MS}
+
+% Unicode character mappings for quantum notation
+\usepackage{newunicodechar}
+\newunicodechar{⟩}{\ensuremath{\rangle}}
+\newunicodechar{⟨}{\ensuremath{\langle}}
+\newunicodechar{ψ}{\ensuremath{\psi}}
+\newunicodechar{λ}{\ensuremath{\lambda}}
+\newunicodechar{ε}{\ensuremath{\varepsilon}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{−}{\ensuremath{-}}
+
+% Improved spacing and typography
+\usepackage{microtype}
+\usepackage{setspace}
+\setstretch{1.15}
+
+% Better paragraph spacing
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\parindent}{0pt}
+
+% Section spacing improvements with selective page breaks
 \usepackage{titlesec}
+% Only main sections (1, 2, 3, etc.) start on new pages, not subsections (1.1, 2.1, etc.)
+\titleformat{\section}[display]
+  {\normalfont\Large\bfseries}{\thesection}{20pt}{\Large}
+\titlespacing*{\section}{0pt}{0pt}{20pt}
 
-% Page layout
-\linespread{1.15}
-\setlength{\parindent}{0.5in}
+% Subsections stay on same page with normal spacing
+\titlespacing{\subsection}{0pt}{14pt plus 3pt minus 2pt}{6pt plus 2pt minus 1pt}
+\titlespacing{\subsubsection}{0pt}{12pt plus 3pt minus 2pt}{4pt plus 2pt minus 1pt}
 
-% Math commands
-\newcommand{\ket}[1]{\left|#1\right\rangle}
-\newcommand{\bra}[1]{\left\langle#1\right|}
-\newcommand{\braket}[2]{\left\langle#1\middle|#2\right\rangle}
+% Custom command to force page breaks before main sections only
+\let\oldsection\section
+\renewcommand{\section}{\clearpage\oldsection}
 
-% Title page
-\title{Secure Quantum Zero-Knowledge Proofs:\\Implementation, Analysis, and Optimization}
-\author{
-    Nicolas Cloutier\\
-    \small{ORCID: 0009-0008-5289-5324}\\
-    \small{GitHub: \url{https://github.com/nicksdigital/}}\\
-    \small{Affiliation: Hydra Research Labs}
-}
-\date{May 24th, 2025}
+% Better table and figure spacing
+\setlength{\floatsep}{12pt plus 2pt minus 2pt}
+\setlength{\textfloatsep}{16pt plus 2pt minus 4pt}
+\setlength{\intextsep}{12pt plus 2pt minus 2pt}
 
-% Hyperlink setup
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    urlcolor=blue,
-    pdftitle={Secure Quantum Zero-Knowledge Proofs: Implementation, Analysis, and Optimization},
-    pdfauthor={Nicolas Cloutier},
-    pdfsubject={Quantum Cryptography},
-    pdfkeywords={quantum, zero-knowledge, cryptography, security}
-}
+% Prevent page breaks in code blocks and tables
+\usepackage{fvextra}
+\usepackage{longtable}
+\usepackage{array}
 
-% Abstract environment
-\renewenvironment{abstract}{%
-    \begin{center}%
-        \normalsize\bfseries\abstractname
-    \end{center}
-    \quotation\noindent\ignorespaces
-}{%
-    \endquotation
-}
+% Keep code blocks together
+\fvset{breaklines=true,breakanywhere=true}
 
-% Section formatting with exact spacing from YAML frontmatter
-\titleformat{\section}
-  {\large\bfseries}{\thesection}{1em}{}
-\titleformat{\subsection}
-  {\normalsize\bfseries}{\thesubsection}{1em}{}
-\titlespacing*{\section}{0pt}{12pt plus 4pt minus 2pt}{6pt plus 2pt minus 2pt}
-\titlespacing*{\subsection}{0pt}{10pt plus 3pt minus 2pt}{4pt plus 2pt minus 2pt}
+% Prevent orphans and widows
+\widowpenalty=10000
+\clubpenalty=10000
+
+% Keep tables together
+\usepackage{float}
+\restylefloat{table}
 
