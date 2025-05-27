@@ -95,17 +95,20 @@ Our quantum zero-knowledge proof system is designed with the following security 
 
 #### 3.1.1 Zero-Knowledge Property
 
-**Theorem 1 (Zero-Knowledge)**: For any quantum polynomial-time verifier $V^*$, there exists a simulator $S$ such that for all quantum states $\ket{\psi}$:
+**Theorem 1 (Zero-Knowledge)**: For any quantum polynomial-time verifier V*, there exists a simulator S such that for all quantum states |ψ⟩:
 
-$$\text{View}_{V^*}(P, V^*) \approx_S S(V^*)$$
-
-where $\approx_S$ denotes computational indistinguishability.
+```
+View_V*(P, V*) ≈_S S(V*)
+```
+where ≈_S denotes computational indistinguishability.
 
 #### 3.1.2 Soundness
 
-**Theorem 2 (Soundness)**: For any cheating prover $P^*$ not knowing the witness, the probability of successful verification is negligible in the security parameter $\lambda$:
+**Theorem 2 (Soundness)**: For any cheating prover P* not knowing the witness, the probability of successful verification is negligible in the security parameter λ:
 
-$$\text{Pr}[\braket{P^*}{V}(x) = 1 \mid x \notin L] \leq \text{negl}(\lambda)$$
+```
+Pr[⟨P*, V⟩(x) = 1 | x ∉ L] ≤ negl(λ)
+```
 
 ### 3.2 Security Analysis
 

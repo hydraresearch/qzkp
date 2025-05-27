@@ -1,0 +1,62 @@
+% header.tex - Academic paper on Quantum Zero-Knowledge Proofs
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{needspace}
+\usepackage{titlesec}
+
+% Page layout
+\linespread{1.15}
+\setlength{\parindent}{0.5in}
+
+% Math commands
+\newcommand{\ket}[1]{\left|#1\right\rangle}
+\newcommand{\bra}[1]{\left\langle#1\right|}
+\newcommand{\braket}[2]{\left\langle#1\middle|#2\right\rangle}
+
+% Title page
+\title{Secure Quantum Zero-Knowledge Proofs:\\Implementation, Analysis, and Optimization}
+\author{
+    Nicolas Cloutier\\
+    \small{ORCID: 0009-0008-5289-5324}\\
+    \small{GitHub: \url{https://github.com/nicksdigital/}}\\
+    \small{Affiliation: Hydra Research Labs}
+}
+\date{May 24th, 2025}
+
+% Hyperlink setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    pdftitle={Secure Quantum Zero-Knowledge Proofs: Implementation, Analysis, and Optimization},
+    pdfauthor={Nicolas Cloutier},
+    pdfsubject={Quantum Cryptography},
+    pdfkeywords={quantum, zero-knowledge, cryptography, security}
+}
+
+% Abstract environment
+\renewenvironment{abstract}{%
+    \begin{center}%
+        \normalsize\bfseries\abstractname
+    \end{center}
+    \quotation\noindent\ignorespaces
+}{%
+    \endquotation
+}
+
+% Section formatting with exact spacing from YAML frontmatter
+\titleformat{\section}
+  {\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalsize\bfseries}{\thesubsection}{1em}{}
+\titlespacing*{\section}{0pt}{12pt plus 4pt minus 2pt}{6pt plus 2pt minus 2pt}
+\titlespacing*{\subsection}{0pt}{10pt plus 3pt minus 2pt}{4pt plus 2pt minus 2pt}
+
